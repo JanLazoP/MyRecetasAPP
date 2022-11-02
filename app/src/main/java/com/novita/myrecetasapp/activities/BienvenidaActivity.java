@@ -1,10 +1,12 @@
-package com.novita.myrecetasapp;
+package com.novita.myrecetasapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.novita.myrecetasapp.R;
 
 public class BienvenidaActivity extends AppCompatActivity {
 

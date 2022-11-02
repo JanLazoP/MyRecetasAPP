@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.novita.myrecetasapp.LoginActivity"
+    tools:context="com.novita.myrecetasapp.activities.LoginActivity"
     android:id="@+id/mainactivida">
 
     <ImageView

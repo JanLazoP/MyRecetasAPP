@@ -1,10 +1,13 @@
-package com.novita.myrecetasapp;
+package com.novita.myrecetasapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.novita.myrecetasapp.MainActivity;
+import com.novita.myrecetasapp.R;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -19,6 +22,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void MainActividad(View view) {
-        startActivity(new Intent(LoginActivity.this,MainActivity.class));
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
     }
 }
