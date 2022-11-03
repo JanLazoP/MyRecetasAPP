@@ -13,10 +13,10 @@
         android:theme="@style/Theme.MyRecetasAPP"
         tools:targetApi="31">
         <activity
-            android:name="com.novita.myrecetasapp.activities.LoginActivity"
+            android:name="com.novita.myrecetasapp.LoginActivity"
             android:exported="false" />
         <activity
-            android:name="com.novita.myrecetasapp.activities.BienvenidaActivity"
+            android:name="com.novita.myrecetasapp.BienvenidaActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.novita.myrecetasapp.activities.Registrarse"
+            android:name="com.novita.myrecetasapp.Registrarse"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

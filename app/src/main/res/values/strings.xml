@@ -21,4 +21,5 @@
     <string name="todo_recetas">TODO RECETAS</string>
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
