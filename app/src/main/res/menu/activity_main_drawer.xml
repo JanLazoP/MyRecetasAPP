@@ -9,13 +9,9 @@
             android:icon="@drawable/ic_baseline_home_24"
             android:title="Hogar" />
         <item
-            android:id="@+id/nav_explorar"
+            android:id="@+id/nav_map"
             android:icon="@drawable/ic_baseline_explore_24"
             android:title="Explorar" />
-        <item
-            android:id="@+id/map"
-            android:icon="@drawable/ic_baseline_location_on_24"
-            android:title="Ubicación" />
         <item
             android:id="@+id/nav_favoritos"
             android:icon="@drawable/ic_baseline_favorite_24"

@@ -12,11 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyRecetasAPP"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyACU7fZtaThz6AISSRGqfII6JPs2iBRdbY" />
+
         <activity
-            android:name="com.novita.myrecetasapp.LoginActivity"
+            android:name="com.novita.myrecetasapp.activities.LoginActivity"
             android:exported="false" />
         <activity
-            android:name="com.novita.myrecetasapp.BienvenidaActivity"
+            android:name="com.novita.myrecetasapp.activities.BienvenidaActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.novita.myrecetasapp.Registrarse"
+            android:name="com.novita.myrecetasapp.activities.Registrarse"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

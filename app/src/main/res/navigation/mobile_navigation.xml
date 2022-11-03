@@ -22,4 +22,9 @@
         android:name="com.novita.myrecetasapp.ui.slideshow.FavoritosFragment"
         android:label="favoritos"
         tools:layout="@layout/fragment_favoritos" />
+    <fragment
+        android:id="@+id/nav_map"
+        android:name="com.novita.myrecetasapp.MapsFragment"
+        android:label="@string/map"
+        tools:layout="@layout/fragment_maps" />
 </navigation>
