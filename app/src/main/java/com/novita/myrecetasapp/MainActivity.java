@@ -3,8 +3,10 @@ package com.novita.myrecetasapp;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Api;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -14,7 +16,12 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.novita.myrecetasapp.adapters.HomeHorizontalAdapter;
 import com.novita.myrecetasapp.databinding.ActivityMainBinding;
 import com.novita.myrecetasapp.interfaces.IComunicacionF;
 
@@ -22,6 +29,13 @@ public class MainActivity extends AppCompatActivity{
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+    LinearLayoutManager linearLayoutManager;
+    RecyclerView recyclerView;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    FireBaseRecyclerAdapter<HomeHorizontalAdapter,ViewHolder>fireBaseRecyclerAdapter;
+    FirebaseRecyclerOptions<HomeHorizontalAdapter>options;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
