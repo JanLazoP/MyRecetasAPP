@@ -27,4 +27,9 @@
         android:name="com.novita.myrecetasapp.MapsFragment"
         android:label="@string/map"
         tools:layout="@layout/fragment_maps" />
+    <activity
+        android:id="@+id/nav_subirReceta"
+        android:name="com.novita.myrecetasapp.activities.SubirRecetaActivity"
+        android:label="subir"
+        tools:layout="@layout/activity_subir_receta"/>
 </navigation>

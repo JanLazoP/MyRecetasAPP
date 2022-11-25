@@ -14,7 +14,7 @@
         android:theme="@style/Theme.MyRecetasAPP"
         tools:targetApi="31">
         <activity
-            android:name=".SubirRecetaActivity"
+            android:name=".activities.SubirRecetaActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

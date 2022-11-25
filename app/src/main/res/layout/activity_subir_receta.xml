@@ -22,6 +22,7 @@
             android:src="@drawable/nohayimagen"
             />
         <EditText
+            android:id="@+id/etxtNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre"
@@ -29,6 +30,7 @@
             android:textSize="19sp"
             />
         <EditText
+            android:id="@+id/etxtDescripcion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Descripción"
@@ -36,6 +38,7 @@
             android:textSize="19sp"
             />
         <EditText
+            android:id="@+id/etxtIngredientes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ingredientes"
@@ -43,6 +46,7 @@
             android:textSize="19sp"
             />
         <EditText
+            android:id="@+id/etxtPasos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Pasos"
@@ -64,9 +68,8 @@
             android:layout_height="60dp"
             android:text="Subir Receta"
             android:textSize="22sp"
-            android:backgroundTint="#f08850"/>
+            android:backgroundTint="#f08850"
+            android:onClick="btnsubirReceta"/>
     </LinearLayout>
-
-    
 
 </ScrollView>

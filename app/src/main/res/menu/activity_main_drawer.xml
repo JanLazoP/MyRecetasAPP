@@ -16,5 +16,9 @@
             android:id="@+id/nav_favoritos"
             android:icon="@drawable/ic_baseline_favorite_24"
             android:title="Favoritos" />
+        <item
+            android:id="@+id/nav_subirReceta"
+            android:title="Subir Receta"
+            android:icon="@android:drawable/stat_sys_upload" />
     </group>
 </menu>

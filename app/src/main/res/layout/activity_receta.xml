@@ -29,7 +29,7 @@
             android:weightSum="2">
 
             <TextView
-                android:id="@+id/txtRecipeName"
+                android:id="@+id/txtnombreReceta"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -89,18 +89,6 @@
                           \npaso 2: blablabal
                           \npaso 3: blablabal"
             android:textSize="19sp" />
-
-        <TextView
-            android:id="@+id/txtPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:padding="20dp"
-            android:text="20 mins"
-            android:textColor="@color/black"
-            android:textSize="19sp"
-            android:textStyle="bold" />
 
         <RelativeLayout
             android:layout_width="match_parent"

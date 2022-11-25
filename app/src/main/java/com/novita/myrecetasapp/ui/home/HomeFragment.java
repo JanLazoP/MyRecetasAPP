@@ -1,6 +1,7 @@
 package com.novita.myrecetasapp.ui.home;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -14,8 +15,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.novita.myrecetasapp.R;
+import com.novita.myrecetasapp.activities.SubirRecetaActivity;
 import com.novita.myrecetasapp.adapters.HomeHorizontalAdapter;
 import com.novita.myrecetasapp.adapters.HomeVerticalAdapter;
+import com.novita.myrecetasapp.adapters.RecetaActivity;
 import com.novita.myrecetasapp.interfaces.IComunicacionF;
 import com.novita.myrecetasapp.modelos.HomeHorizontalModelo;
 import com.novita.myrecetasapp.modelos.HomeVerticalModelo;
@@ -88,5 +91,10 @@ public class HomeFragment extends Fragment {
 
 
         return vista;
+    }
+
+    public void fab_subirActivity(View view) {
+        Intent intent = new Intent(getActivity(), SubirRecetaActivity.class);
+        startActivity(intent);
     }
 }
