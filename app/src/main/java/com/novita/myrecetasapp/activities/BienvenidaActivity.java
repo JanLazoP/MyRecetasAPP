@@ -16,6 +16,8 @@ public class BienvenidaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bienvenida);
     }
 
+
+    //metodos para redirigir al usuario segun la opcion
     public void registrar(View view) {
         startActivity(new Intent(BienvenidaActivity.this, Registrarse.class));
     }

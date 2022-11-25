@@ -25,16 +25,17 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    CardView cardReceta;
-    IComunicacionF interfaceComunicacionFragments;
-    View vista;
-    Activity actividad;
+    //fragment principal donde se mostraran los itemas y categorias
 
+    //definir vista
+    View vista;
+
+    //nuestros recicler view, la lista a usar del modelo horizontal y su adaptador
     RecyclerView homeHorizontalRecycler,homeVerticalRecycler;
     List<HomeHorizontalModelo> homeHorizontalModeloList;
     HomeHorizontalAdapter homeHorizontalAdapter;
 
-    ////////////////////////////// verticales
+    ////////////////////////////// verticales lista modelo y adaptador
     List<HomeVerticalModelo> homeVerticalModeloList;
     HomeVerticalAdapter homeVerticalAdapter;
 
@@ -46,19 +47,22 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
          vista = inflater.inflate(R.layout.fragment_home,container,false);
 
-
+        //definir la vista de los recycler view
         homeHorizontalRecycler = vista.findViewById(R.id.home_hor_recycler);
         homeVerticalRecycler = vista.findViewById(R.id.home_ver_recycler);
 
-        /////////// recycler horizontal
+        /////////// recycler horizontal arraylist
         homeHorizontalModeloList = new ArrayList<>();
 
+        //añadiendo los items al arraylist
         homeHorizontalModeloList.add(new HomeHorizontalModelo(R.drawable.almuerzo,"almuerzos"));
         homeHorizontalModeloList.add(new HomeHorizontalModelo(R.drawable.salad,"ensaladas"));
         homeHorizontalModeloList.add(new HomeHorizontalModelo(R.drawable.dinner,"cenas"));
         homeHorizontalModeloList.add(new HomeHorizontalModelo(R.drawable.sandwich,"sandwich"));
         homeHorizontalModeloList.add(new HomeHorizontalModelo(R.drawable.dessert,"postres"));
 
+
+        //armar adapter
         homeHorizontalAdapter = new HomeHorizontalAdapter(getActivity(),homeHorizontalModeloList);
 
         homeHorizontalRecycler.setAdapter(homeHorizontalAdapter);

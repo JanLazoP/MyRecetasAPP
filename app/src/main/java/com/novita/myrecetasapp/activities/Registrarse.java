@@ -16,6 +16,7 @@ public class Registrarse extends AppCompatActivity {
         setContentView(R.layout.activity_registrarse);
     }
 
+    //redireccionamiento de botones
     public void login(View view) {
         startActivity(new Intent(Registrarse.this, LoginActivity.class));
     }

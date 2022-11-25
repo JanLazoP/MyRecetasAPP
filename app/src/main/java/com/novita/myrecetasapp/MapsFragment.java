@@ -30,8 +30,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        SupportMapFragment mapFragment = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        SupportMapFragment supportMapFragment = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.map);
+        supportMapFragment.getMapAsync(this);
 
     }
 
@@ -39,7 +39,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         GoogleMap mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
+        // agregar marcadores al mapa
         LatLng Chile2 = new LatLng(-29.90504166041276, -71.25779386675524);
         LatLng Chile = new LatLng(-29.908412576325546, -71.25720040311022);
         LatLng Chile3 = new LatLng(-29.9056914844093, -71.26116723901846);

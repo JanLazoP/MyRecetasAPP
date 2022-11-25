@@ -16,7 +16,7 @@ import com.novita.myrecetasapp.modelos.HomeHorizontalModelo;
 import java.util.List;
 
 public class HomeHorizontalAdapter extends RecyclerView.Adapter<HomeHorizontalAdapter.ViewHolder> {
-
+    //adapter de los cardview que se mostraran hacia el lado en la app como las categorias
    Context context;
    List<HomeHorizontalModelo> list;
 

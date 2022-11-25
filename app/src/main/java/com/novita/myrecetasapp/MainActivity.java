@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.novita.myrecetasapp.databinding.ActivityMainBinding;
 import com.novita.myrecetasapp.interfaces.IComunicacionF;
 
+//autor jan lazo, daniel vespa
 public class MainActivity extends AppCompatActivity{
 
     private AppBarConfiguration mAppBarConfiguration;

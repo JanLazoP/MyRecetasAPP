@@ -2,6 +2,7 @@ package com.novita.myrecetasapp.modelos;
 
 public class HomeHorizontalModelo {
 
+    //modelo a mostrar de los items horizontales
 
     int imagen;
     String nombre;

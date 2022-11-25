@@ -8,6 +8,7 @@ import com.novita.myrecetasapp.R;
 
 public class RecetaActivity extends AppCompatActivity {
 
+    //actividad donde se mostrara la receta
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

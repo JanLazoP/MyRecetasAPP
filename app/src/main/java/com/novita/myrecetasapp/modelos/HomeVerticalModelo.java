@@ -1,6 +1,10 @@
 package com.novita.myrecetasapp.modelos;
 
 public class HomeVerticalModelo {
+
+    ////modelo para los itemas a mostrar verticales
+
+
     int image;
     String nombre;
 

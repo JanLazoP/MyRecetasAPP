@@ -26,7 +26,7 @@ public class FavoritosFragment extends Fragment {
     RecyclerView favoritosVerticalRecycler;
 
 
-    ////////////////////////////// verticales
+    ////////////////////////////// verticales modelo y adaptar, igual que el fragment home
     List<FavoritosVerticalModelo> favoritosVerticalModeloList;
     FavoritosVerticalAdapter favoritosVerticalAdapter;
 
@@ -35,7 +35,7 @@ public class FavoritosFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // Inflate the layout for this fragment
+        // inflar la vista
 
         View root = inflater.inflate(R.layout.fragment_favoritos,container,false);
 

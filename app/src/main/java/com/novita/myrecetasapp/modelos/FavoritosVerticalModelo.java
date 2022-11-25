@@ -2,6 +2,8 @@ package com.novita.myrecetasapp.modelos;
 
 public class FavoritosVerticalModelo {
 
+//modelo para los itemas a mostrar verticales
+
         int image;
         String nombre;
 

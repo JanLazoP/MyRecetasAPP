@@ -20,7 +20,7 @@ import java.util.List;
 public class FavoritosVerticalAdapter extends RecyclerView.Adapter<FavoritosVerticalAdapter.ViewHolder> {
     Context context;
     List<FavoritosVerticalModelo> list;
-
+//adapter de los cardview que se mostraran hacia abajo en la app
     public FavoritosVerticalAdapter(Context context, List<FavoritosVerticalModelo> list) {
         this.context = context;
         this.list = list;

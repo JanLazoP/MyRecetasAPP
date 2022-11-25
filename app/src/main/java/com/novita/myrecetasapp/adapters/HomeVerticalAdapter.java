@@ -19,6 +19,8 @@ import java.util.List;
 
 public class HomeVerticalAdapter extends RecyclerView.Adapter<HomeVerticalAdapter.ViewHolder> {
 
+    //adapter de los cardview que se mostraran hacia abajo en la app
+
     Context context;
     List<HomeVerticalModelo> list;
 

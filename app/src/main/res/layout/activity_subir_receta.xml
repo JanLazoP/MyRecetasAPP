@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.SubirRecetaActivity">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="30dp"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/r_imagen"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/nohayimagen"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre"
+            android:layout_marginTop="10dp"
+            android:textSize="19sp"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descripción"
+            android:layout_marginTop="10dp"
+            android:textSize="19sp"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingredientes"
+            android:layout_marginTop="10dp"
+            android:textSize="19sp"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pasos"
+            android:layout_marginTop="10dp"
+            android:textSize="19sp"
+            />
+        <Button
+            android:id="@+id/btnSeleccionarImg"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Seleccionar Imagen"
+            android:textSize="22sp"
+            android:backgroundTint="#f08850"
+            android:onClick="btnSeleccionarImg"
+            />
+        <Button
+            android:id="@+id/btnSubirReceta"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Subir Receta"
+            android:textSize="22sp"
+            android:backgroundTint="#f08850"/>
+    </LinearLayout>
+
+    
+
+</ScrollView>

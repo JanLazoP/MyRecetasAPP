@@ -67,7 +67,27 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:padding="20dp"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales quis ipsum ut luctus. Quisque sagittis rutrum tellus sed volutpat. Proin a tortor eget leo mattis ullamcorper sed vitae nunc. Sed tincidunt finibus mollis. Donec vitae orci suscipit, dignissim lacus eu, varius nisl. Suspendisse potenti. Nullam vitae leo sed orci vulputate fermentum. Vivamus pharetra, ipsum rhoncus ornare congue, ligula tortor varius leo, a consequat eros dolor elementum purus."
+            android:text="esta receta es muy rica porque xd de la de"
+            android:textSize="19sp" />
+        <TextView
+            android:id="@+id/txtIngredientes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="20dp"
+            android:text="ingrediente 1: blablabla
+                          \ningrediente 2: blablabal
+                          \ningrediente 3: blablabal"
+            android:textSize="19sp" />
+        <TextView
+            android:id="@+id/txtPasos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="20dp"
+            android:text="Paso 1: blablabla
+                          \npaso 2: blablabal
+                          \npaso 3: blablabal"
             android:textSize="19sp" />
 
         <TextView
