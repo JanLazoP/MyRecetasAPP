@@ -17,6 +17,7 @@ public class RecetaModelo {
     }
 
     public RecetaModelo() {
+
     }
 
     public String getImg() {

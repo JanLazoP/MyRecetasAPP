@@ -1,100 +1,110 @@
 package com.novita.myrecetasapp.ui.home;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.load.resource.gif.GifBitmapProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.novita.myrecetasapp.R;
 import com.novita.myrecetasapp.activities.SubirRecetaActivity;
+import com.novita.myrecetasapp.adapters.FavoritosVerticalAdapter;
 import com.novita.myrecetasapp.adapters.HomeHorizontalAdapter;
 import com.novita.myrecetasapp.adapters.HomeVerticalAdapter;
 import com.novita.myrecetasapp.adapters.RecetaActivity;
+import com.novita.myrecetasapp.adapters.RecetaAdapter;
 import com.novita.myrecetasapp.interfaces.IComunicacionF;
+import com.novita.myrecetasapp.modelos.FavoritosVerticalModelo;
 import com.novita.myrecetasapp.modelos.HomeHorizontalModelo;
 import com.novita.myrecetasapp.modelos.HomeVerticalModelo;
+import com.novita.myrecetasapp.modelos.RecetaModelo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-    //fragment principal donde se mostraran los itemas y categorias
+    RecyclerView recyclerView;
+    List<RecetaModelo> recetaLista;
+    RecetaModelo recetaModelo;
+    RecetaAdapter recetaAdapter;
 
-    //definir vista
-    View vista;
+    private DatabaseReference databaseReference;
+    private ValueEventListener valueEventListener;
 
-    //nuestros recicler view, la lista a usar del modelo horizontal y su adaptador
-    RecyclerView homeHorizontalRecycler,homeVerticalRecycler;
-    List<HomeHorizontalModelo> homeHorizontalModeloList;
-    HomeHorizontalAdapter homeHorizontalAdapter;
 
-    ////////////////////////////// verticales lista modelo y adaptador
-    List<HomeVerticalModelo> homeVerticalModeloList;
-    HomeVerticalAdapter homeVerticalAdapter;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
 
-        // Inflate the layout for this fragment
-         vista = inflater.inflate(R.layout.fragment_home,container,false);
+        View vista = inflater.inflate(R.layout.fragment_home,container,false);
 
-        //definir la vista de los recycler view
-        homeHorizontalRecycler = vista.findViewById(R.id.home_hor_recycler);
-        homeVerticalRecycler = vista.findViewById(R.id.home_ver_recycler);
+        recyclerView = vista.findViewById(R.id.home_ver_recycler);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(vista.getContext(),1);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        recetaLista = new ArrayList<>();
+        recetaAdapter = new RecetaAdapter((FragmentActivity) vista.getContext(),recetaLista);
+        recyclerView.setAdapter(recetaAdapter);
 
-        /////////// recycler horizontal arraylist
-        homeHorizontalModeloList = new ArrayList<>();
-
-        //añadiendo los items al arraylist
-        homeHorizontalModeloList.add(new HomeHorizontalModelo(R.drawable.almuerzo,"almuerzos"));
-        homeHorizontalModeloList.add(new HomeHorizontalModelo(R.drawable.salad,"ensaladas"));
-        homeHorizontalModeloList.add(new HomeHorizontalModelo(R.drawable.dinner,"cenas"));
-        homeHorizontalModeloList.add(new HomeHorizontalModelo(R.drawable.sandwich,"sandwich"));
-        homeHorizontalModeloList.add(new HomeHorizontalModelo(R.drawable.dessert,"postres"));
+        ProgressDialog progressDialog = new ProgressDialog(vista.getContext());
+        progressDialog.setMessage("Cargando Elementos...");
 
 
-        //armar adapter
-        homeHorizontalAdapter = new HomeHorizontalAdapter(getActivity(),homeHorizontalModeloList);
+        databaseReference = FirebaseDatabase.getInstance().getReference("Receta");
 
-        homeHorizontalRecycler.setAdapter(homeHorizontalAdapter);
-        homeHorizontalRecycler.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
-        homeHorizontalRecycler.setHasFixedSize(true);
-        homeHorizontalRecycler.setNestedScrollingEnabled(false);
+        progressDialog.show();
 
-        /////////// recycler vertical
-        homeVerticalModeloList = new ArrayList<>();
+        valueEventListener = databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-        homeVerticalModeloList.add(new HomeVerticalModelo(R.drawable.almuerzo_receta,"Pollo Coreano"));
-        homeVerticalModeloList.add(new HomeVerticalModelo(R.drawable.almuerzo_receta2,"Pollo y arroz"));
-        homeVerticalModeloList.add(new HomeVerticalModelo(R.drawable.almuerzo_receta3,"Pasta italiana"));
-        homeVerticalModeloList.add(new HomeVerticalModelo(R.drawable.almuerzo_receta4,"Tortillas saludables"));
+                recetaLista.clear();
 
-        homeVerticalAdapter = new HomeVerticalAdapter(getActivity(),homeVerticalModeloList);
+                for(DataSnapshot itemSnapshot: snapshot.getChildren()){
 
-        homeVerticalRecycler.setAdapter(homeVerticalAdapter);
-        homeVerticalRecycler.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false));
-        homeVerticalRecycler.setHasFixedSize(true);
-        homeVerticalRecycler.setNestedScrollingEnabled(false);
+                    RecetaModelo recetaModelo = itemSnapshot.getValue(RecetaModelo.class);
+                    recetaLista.add(recetaModelo);
 
+                }
 
+                recetaAdapter.notifyDataSetChanged();
+                progressDialog.dismiss();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                progressDialog.dismiss();
+
+            }
+        });
 
         return vista;
     }
 
-    public void fab_subirActivity(View view) {
-        Intent intent = new Intent(getActivity(), SubirRecetaActivity.class);
-        startActivity(intent);
-    }
+
 }

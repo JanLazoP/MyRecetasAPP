@@ -40,6 +40,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.929" />
+    <TextView
+        android:id="@+id/ver_descripcion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        android:textColor="#00FFFFFF"
+        />
+    <TextView
+        android:id="@+id/ver_ingredientes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        android:textColor="#00FFFFFF"
+        />
+    <TextView
+        android:id="@+id/ver_pasos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        android:textColor="#00FFFFFF"
+
+        />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
