@@ -15,9 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.ContactsContract;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.Toast;
 
@@ -40,8 +43,10 @@ import com.novita.myrecetasapp.modelos.HomeHorizontalModelo;
 import com.novita.myrecetasapp.modelos.HomeVerticalModelo;
 import com.novita.myrecetasapp.modelos.RecetaModelo;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class HomeFragment extends Fragment {
 
@@ -49,6 +54,7 @@ public class HomeFragment extends Fragment {
     List<RecetaModelo> recetaLista;
     RecetaModelo recetaModelo;
     RecetaAdapter recetaAdapter;
+    EditText editBuscar;
 
     private DatabaseReference databaseReference;
     private ValueEventListener valueEventListener;
@@ -66,6 +72,9 @@ public class HomeFragment extends Fragment {
         recyclerView = vista.findViewById(R.id.home_ver_recycler);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(vista.getContext(),1);
         recyclerView.setLayoutManager(gridLayoutManager);
+
+        editBuscar = (EditText)vista.findViewById(R.id.editarBusqueda);
+
         recetaLista = new ArrayList<>();
         recetaAdapter = new RecetaAdapter((FragmentActivity) vista.getContext(),recetaLista);
         recyclerView.setAdapter(recetaAdapter);
@@ -103,7 +112,39 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        editBuscar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                filtrar(editable.toString());
+            }
+        });
+
         return vista;
+    }
+
+    private void filtrar(String toString) {
+
+        ArrayList<RecetaModelo> filtrarLista = new ArrayList<>();
+        for (RecetaModelo item:recetaLista){
+            if(item.getNombre().toLowerCase().contains(toString.toLowerCase())){
+
+                filtrarLista.add(item);
+
+            }
+        }
+
+        recetaAdapter.listaFiltrada(filtrarLista);
+
     }
 
 

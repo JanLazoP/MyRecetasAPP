@@ -70,6 +70,13 @@ public class RecetaAdapter extends RecyclerView.Adapter<RecetaViewHolder> {
     public int getItemCount() {
         return recetaModeloList.size();
     }
+
+    public void listaFiltrada(ArrayList<RecetaModelo> filtrarLista) {
+
+        recetaModeloList = filtrarLista;
+        notifyDataSetChanged();
+
+    }
 }
 
 class RecetaViewHolder extends RecyclerView.ViewHolder{
