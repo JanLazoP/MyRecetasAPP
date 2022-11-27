@@ -1,8 +1,11 @@
 package com.novita.myrecetasapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -15,6 +18,9 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.novita.myrecetasapp.activities.BienvenidaActivity;
 import com.novita.myrecetasapp.databinding.ActivityMainBinding;
 import com.novita.myrecetasapp.interfaces.IComunicacionF;
 
@@ -23,6 +29,9 @@ public class MainActivity extends AppCompatActivity{
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
+    TextView correoUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +53,15 @@ public class MainActivity extends AppCompatActivity{
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+
+        correoUsuario = findViewById(R.id.textViewCorreo);
+
+        //correoUsuario.setText(firebaseUser.getEmail());
+
+        //Toast.makeText(this,firebaseUser.getEmail(),Toast.LENGTH_LONG);
     }
 
     @Override
@@ -61,4 +79,9 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
+    public void cerrarSesion(MenuItem item) {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(), BienvenidaActivity.class));
+        finish();
+    }
 }

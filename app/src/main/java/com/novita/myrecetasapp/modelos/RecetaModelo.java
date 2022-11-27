@@ -6,6 +6,8 @@ public class RecetaModelo {
     private String ingredientes;
     private String pasos;
     private String img;
+    private String key;
+    private String recetaKey;
 
     public RecetaModelo(String nombre, String descripcion, String ingredientes, String pasos, String img) {
         this.nombre = nombre;
@@ -16,9 +18,17 @@ public class RecetaModelo {
 
     }
 
-    public RecetaModelo() {
-
+    public RecetaModelo(String nombre, String descripcion, String ingredientes, String pasos, String img, String key, String recetaKey) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.ingredientes = ingredientes;
+        this.pasos = pasos;
+        this.img = img;
+        this.key = key;
+        this.recetaKey = recetaKey;
     }
+
+    public RecetaModelo(){}
 
     public String getImg() {
         return img;
@@ -58,5 +68,21 @@ public class RecetaModelo {
 
     public void setPasos(String pasos) {
         this.pasos = pasos;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getRecetaKey() {
+        return recetaKey;
+    }
+
+    public void setRecetaKey(String recetaKey) {
+        this.recetaKey = recetaKey;
     }
 }

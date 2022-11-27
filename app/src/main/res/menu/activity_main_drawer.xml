@@ -19,6 +19,12 @@
         <item
             android:id="@+id/nav_subirReceta"
             android:title="Subir Receta"
-            android:icon="@android:drawable/stat_sys_upload" />
+            android:icon="@android:drawable/stat_sys_upload"
+            />
+        <item
+            android:id="@+id/cerrarSesion"
+            android:title="Cerrar Sesión"
+            android:icon="@drawable/ic_baseline_login_24"
+            android:onClick="cerrarSesion"/>
     </group>
 </menu>

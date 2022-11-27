@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,7 +20,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -34,7 +40,11 @@ public class SubirRecetaActivity extends AppCompatActivity {
     ImageView imgReceta;
     Uri uri;
     EditText txtNombre,txtDecripcion,txtIngredientes,txtPasos;
-    String imageUrl;
+    String imageUrl,userID;
+    FirebaseAuth firebaseAuth;
+    FirebaseFirestore firebaseFirestore;
+
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -47,6 +57,12 @@ public class SubirRecetaActivity extends AppCompatActivity {
         txtDecripcion = (EditText)findViewById(R.id.etxtDescripcion);
         txtIngredientes = (EditText)findViewById(R.id.etxtIngredientes);
         txtPasos = (EditText)findViewById(R.id.etxtPasos);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
+        userID = firebaseAuth.getCurrentUser().getUid();
+
     }
 
      public void btnSeleccionarImg(View view) {
@@ -77,8 +93,8 @@ public class SubirRecetaActivity extends AppCompatActivity {
         progressDialog.setMessage("Receta subiendose...");
         progressDialog.show();
 
-         StorageReference storageReference = FirebaseStorage.getInstance()
-                 .getReference().child("ImagenReceta").child(uri.getLastPathSegment());
+         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("ImagenReceta").child(uri.getLastPathSegment());
+
          storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
              @Override
              public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -102,14 +118,30 @@ public class SubirRecetaActivity extends AppCompatActivity {
      }
 
     public void btnsubirReceta(View view) {
+
+        if(uri == null){
+            Toast.makeText(this, "Por favor subir imagen", Toast.LENGTH_SHORT).show();
+        }
+        else if(txtNombre.getText().toString().isEmpty()){
+            Toast.makeText(this, "Nombre no puede estar vacio", Toast.LENGTH_SHORT).show();
+        }
+        else if(txtDecripcion.getText().toString().isEmpty()){
+            Toast.makeText(this, "Descripción no puede estar vacio", Toast.LENGTH_SHORT).show();
+        }
+        else if(txtIngredientes.getText().toString().isEmpty()){
+            Toast.makeText(this, "Ingredientes no puede estar vacio", Toast.LENGTH_SHORT).show();
+        }
+        else if(txtPasos.getText().toString().isEmpty()){
+            Toast.makeText(this, "Pasos no puede estar vacio", Toast.LENGTH_SHORT).show();
+        }else{
         subirImagen();
+        }
     }
 
     public void subirReceta(){
 
         RecetaModelo recetaModelo = new RecetaModelo(
-          txtNombre.getText().toString(),txtDecripcion.getText().toString(),txtIngredientes.getText().toString(),txtPasos.getText().toString(),imageUrl
-        );
+          txtNombre.getText().toString(),txtDecripcion.getText().toString(),txtIngredientes.getText().toString(),txtPasos.getText().toString(),imageUrl);
 
         String myCurrentDateTime = DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
 
@@ -119,9 +151,7 @@ public class SubirRecetaActivity extends AppCompatActivity {
 
                 if(task.isSuccessful()){
 
-                    Toast.makeText(SubirRecetaActivity.this, "La receta ha sido subida", Toast.LENGTH_SHORT).show();
-
-                    finish();
+                    Log.d("TAG", " Receta añadida a base de datos");
                     
                 }
 
@@ -129,11 +159,31 @@ public class SubirRecetaActivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(SubirRecetaActivity.this, "Fallido", Toast.LENGTH_SHORT).show();
+                Log.d("TAG", " la receta no se ha podido subir " + e.getMessage());
 
             }
         });
 
-        
+        String recetaID = firebaseFirestore.collection("usuarios").document(userID).collection("Recetas").document().getId();
+        RecetaModelo fireStoreRecetaModelo = new RecetaModelo(txtNombre.getText().toString(),txtDecripcion.getText().toString(),txtIngredientes.getText().toString(),txtPasos.getText().toString(),imageUrl,myCurrentDateTime,recetaID);
+
+        DocumentReference documentReference = firebaseFirestore.collection("usuarios").document(userID).collection("Recetas").document(recetaID);
+        documentReference.set(fireStoreRecetaModelo).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Log.d("TAG","receta añadida a firestore");
+                Toast toast = Toast.makeText(getApplicationContext(),"Receta subida",Toast.LENGTH_SHORT);
+                toast.show();
+                finish();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("TAG","Receta no añadida a firestore"+ e.getMessage());
+                Toast toast = Toast.makeText(getApplicationContext(),"Fallo al subir la receta "+ e.getMessage(),Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
     }
 }
