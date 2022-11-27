@@ -2,12 +2,16 @@ package com.novita.myrecetasapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.Menu;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.Nullable;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -17,6 +21,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.novita.myrecetasapp.activities.BienvenidaActivity;
 import com.novita.myrecetasapp.databinding.ActivityMainBinding;
 
@@ -26,12 +35,14 @@ public class MainActivity extends AppCompatActivity{
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     FirebaseAuth firebaseAuth;
-    FirebaseUser firebaseUser;
-    TextView correoUsuario;
+    FirebaseFirestore firebaseFirestore;
+    TextView correoUsuario,nombreUsuario;
+    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -51,13 +62,34 @@ public class MainActivity extends AppCompatActivity{
         NavigationUI.setupWithNavController(navigationView, navController);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
+        firebaseFirestore = FirebaseFirestore.getInstance();                     
+        userID = firebaseAuth.getCurrentUser().getUid();
 
-        correoUsuario = findViewById(R.id.textViewCorreo);
+        View headerView = navigationView.getHeaderView(0);
 
-        //correoUsuario.setText(firebaseUser.getEmail());
 
-        //Toast.makeText(this,firebaseUser.getEmail(),Toast.LENGTH_LONG);
+        correoUsuario = (TextView)headerView.findViewById(R.id.textViewCorreo);
+        nombreUsuario = (TextView)headerView.findViewById(R.id.textNombreUsuario);
+
+
+
+
+     DocumentReference documentReference = firebaseFirestore.collection("usuarios").document(userID);
+     documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+         @Override
+         public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+             if(error != null){
+                 Log.d("TAG error n_usuario","onEvent: "+error.getMessage());
+             }else{
+                 nombreUsuario.setText(value.getString("Nombre"));
+                 correoUsuario.setText(value.getString("correo"));
+             }
+         }
+     });
+
+
+
+
     }
 
     @Override
