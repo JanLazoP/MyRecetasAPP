@@ -2,7 +2,6 @@ package com.novita.myrecetasapp.ui.slideshow;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,25 +15,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.api.PageOrBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.novita.myrecetasapp.R;
-import com.novita.myrecetasapp.adapters.FavoritosVerticalAdapter;
-import com.novita.myrecetasapp.adapters.HomeHorizontalAdapter;
-import com.novita.myrecetasapp.adapters.HomeVerticalAdapter;
 import com.novita.myrecetasapp.adapters.RecetaAdapter;
-import com.novita.myrecetasapp.modelos.FavoritosVerticalModelo;
-import com.novita.myrecetasapp.modelos.HomeHorizontalModelo;
-import com.novita.myrecetasapp.modelos.HomeVerticalModelo;
 import com.novita.myrecetasapp.modelos.RecetaModelo;
 
 import java.util.ArrayList;

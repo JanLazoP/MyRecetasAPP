@@ -3,12 +3,9 @@ package com.novita.myrecetasapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -22,7 +19,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.novita.myrecetasapp.activities.BienvenidaActivity;
 import com.novita.myrecetasapp.databinding.ActivityMainBinding;
-import com.novita.myrecetasapp.interfaces.IComunicacionF;
 
 //autor jan lazo, daniel vespa
 public class MainActivity extends AppCompatActivity{
