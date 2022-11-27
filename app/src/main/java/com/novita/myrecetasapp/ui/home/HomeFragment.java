@@ -61,6 +61,7 @@ public class HomeFragment extends Fragment {
     FirebaseFirestore firebaseFirestore;
     String userID;
     String TAG = "TAG";
+    ProgressDialog progressDialog;
 
 
     private DatabaseReference databaseReference;
@@ -82,12 +83,20 @@ public class HomeFragment extends Fragment {
 
         editBuscar = (EditText)vista.findViewById(R.id.editarBusqueda);
 
-        recetaLista = new ArrayList<>();
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
+        progressDialog = new ProgressDialog(vista.getContext());
+        progressDialog.setMessage("Cargando recetas...");
+
+
+
+        recetaLista = new ArrayList<RecetaModelo>();
+
         recetaAdapter = new RecetaAdapter((FragmentActivity) vista.getContext(),recetaLista);
         recyclerView.setAdapter(recetaAdapter);
 
-        ProgressDialog progressDialog = new ProgressDialog(vista.getContext());
-        progressDialog.setMessage("Cargando Elementos...");
+        progressDialog.show();
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Receta");
@@ -103,6 +112,7 @@ public class HomeFragment extends Fragment {
                 for(DataSnapshot itemSnapshot: snapshot.getChildren()){
 
                     RecetaModelo recetaModelo = itemSnapshot.getValue(RecetaModelo.class);
+                    recetaModelo.setKey(itemSnapshot.getKey());
                     recetaLista.add(recetaModelo);
 
                 }

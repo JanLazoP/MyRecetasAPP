@@ -12,12 +12,36 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
+        <EditText
+
+            android:id="@+id/editarBusquedaFav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/background_buscar"
+            android:drawableRight="@drawable/ic_baseline_search_24"
+            android:drawablePadding="9dp"
+            android:fontFamily="sans-serif"
+            android:hapticFeedbackEnabled="false"
+            android:hint="Buscar recetas"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:saveEnabled="false"
+            />
+
         <TextView
             android:id="@+id/textoPopu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="44dp"
             android:layout_marginEnd="32dp"
             android:fontFamily="serif"
             android:text="Favoritos"
@@ -27,13 +51,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.059"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/editarBusquedaFav" />
+
+        <TextView
+            android:id="@+id/textViewMensaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+
+            android:text="No se han encontrado recetas"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editarBusquedaFav" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fav_ver_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textoPopu" />

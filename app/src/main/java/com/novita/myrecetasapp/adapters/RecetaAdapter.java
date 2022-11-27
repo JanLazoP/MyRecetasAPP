@@ -1,6 +1,7 @@
 package com.novita.myrecetasapp.adapters;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,12 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.novita.myrecetasapp.R;
 import com.novita.myrecetasapp.modelos.RecetaModelo;
 
@@ -24,10 +31,17 @@ public class RecetaAdapter extends RecyclerView.Adapter<RecetaViewHolder> {
 
     FragmentActivity context;
     List<RecetaModelo> recetaModeloList;
+    String userID;
+    String recetaKey = "";
+    FirebaseAuth firebaseAuth;
+    FirebaseFirestore firebaseFirestore;
 
     public RecetaAdapter(FragmentActivity context, List<RecetaModelo> recetaModeloList) {
         this.context = context;
         this.recetaModeloList = recetaModeloList;
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
     }
 
     @NonNull
@@ -44,6 +58,7 @@ public class RecetaAdapter extends RecyclerView.Adapter<RecetaViewHolder> {
     public void onBindViewHolder(@NonNull RecetaViewHolder holder, int position) {
 
         Glide.with(context).load(recetaModeloList.get(position).getImg()).into(holder.imageView);
+
         holder.nombre.setText(recetaModeloList.get(position).getNombre());
         holder.descripcion.setText(recetaModeloList.get(position).getDescripcion());
         holder.ingredientes.setText(recetaModeloList.get(position).getIngredientes());
@@ -58,7 +73,43 @@ public class RecetaAdapter extends RecyclerView.Adapter<RecetaViewHolder> {
                 intent.putExtra("descripcion",recetaModeloList.get(holder.getAdapterPosition()).getDescripcion());
                 intent.putExtra("ingredientes",recetaModeloList.get(holder.getAdapterPosition()).getIngredientes());
                 intent.putExtra("pasos",recetaModeloList.get(holder.getAdapterPosition()).getPasos());
-                context.startActivity(intent);
+                intent.putExtra("valorkey",recetaModeloList.get(holder.getAdapterPosition()).getKey());
+                //context.startActivity(intent);
+
+                if(firebaseAuth.getCurrentUser() != null){
+                    userID = firebaseAuth.getCurrentUser().getUid();
+                    if(recetaModeloList.get(holder.getAdapterPosition()).getRecetaKey() == null){
+                        final DocumentReference documentReference = firebaseFirestore.collection("usuarios").document(userID);
+                        documentReference.collection("Recetas").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                                    RecetaModelo recetaModelo = documentSnapshot.toObject(RecetaModelo.class);
+                                    if (recetaModelo.getKey().equals(recetaModeloList.get(holder.getAdapterPosition()).getKey())){
+                                        recetaKey = recetaModelo.getRecetaKey();
+                                        intent.putExtra("recetakeyvalor",recetaKey);
+                                        context.startActivity(intent);
+                                    }
+                                }
+
+                                if(recetaKey.equals("")){
+                                    intent.putExtra("recetakeyvalor",recetaModeloList.get(holder.getAdapterPosition()).getRecetaKey());
+                                    context.startActivity(intent);
+                                }
+                            }
+                        });
+                    }
+                    else{
+                        Log.d("TAG adapterReceta", recetaKey + " adapter");
+                        intent.putExtra("recetakeyvalor",recetaModeloList.get(holder.getAdapterPosition()).getRecetaKey());
+                        context.startActivity(intent);
+
+                    }
+                }else
+                {
+                    intent.putExtra("recetakeyvalor",recetaModeloList.get(holder.getAdapterPosition()).getRecetaKey());
+                    context.startActivity(intent);
+                }
 
             }
         });
