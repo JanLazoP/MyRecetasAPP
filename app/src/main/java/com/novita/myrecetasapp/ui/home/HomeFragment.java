@@ -25,11 +25,13 @@ import android.widget.GridLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.load.resource.gif.GifBitmapProvider;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.novita.myrecetasapp.R;
 import com.novita.myrecetasapp.activities.SubirRecetaActivity;
 import com.novita.myrecetasapp.adapters.FavoritosVerticalAdapter;
@@ -55,6 +57,11 @@ public class HomeFragment extends Fragment {
     RecetaModelo recetaModelo;
     RecetaAdapter recetaAdapter;
     EditText editBuscar;
+    FirebaseAuth firebaseAuth;
+    FirebaseFirestore firebaseFirestore;
+    String userID;
+    String TAG = "TAG";
+
 
     private DatabaseReference databaseReference;
     private ValueEventListener valueEventListener;
